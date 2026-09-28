@@ -1,5 +1,5 @@
 // ====== DADOS DE TESTE ======
-const nums = [1,2,3,4];// ✅ CORRIGIDO: Valores adicionados
+const nums = [1, 2, 3, 4]; // ✅ PREENCHIDO
 const p = { titulo: "Caneca", preco: 25 };
 const cores = ["azul", "verde"];
 const produtos = [
@@ -7,6 +7,7 @@ const produtos = [
     { nome: "Camiseta", estoque: 0 },
     { nome: "Adesivo", estoque: 7 }
 ];
+const precos =[1,2,3,4]; // ✅ PREENCHIDO
 
 // ====== EXERCÍCIOS DE MAP E FILTER ======
 // Q1: Multiplicar por 2
