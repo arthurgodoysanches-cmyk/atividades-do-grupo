@@ -1,6 +1,6 @@
 /**
  * REPOSITÓRIO DA SQUAD - DIAGNÓSTICO DE LABORATÓRIO
- * Arquivo: estudos/promises-async-SEUNOME.js
+ * Arquivo: arthur/estudos/promises-async-ARTHUR.js
  * Assunto: Promises e Async/Await em JavaScript
  */
 
@@ -39,7 +39,6 @@
 // 💻 QUESTÕES PRÁTICAS E CÓDIGOS CORRIGIDOS
 // =========================================================================
 
-// --- FUNÇÃO AUXILIAR (Para podermos testar a Questão 3 no VS Code) ---
 function buscarProdutoMock(id) {
     return new Promise((resolve, reject) => {
         if (id > 0) resolve({ id, nome: "Produto " + id });
@@ -57,7 +56,6 @@ async function executarBuscaProduto() {
     }
 }
 
-
 // 6. Escreva uma função assíncrona chamada buscarProduto que recebe um id, espera 1 segundo...
 function buscarProduto(id) {
     return new Promise((resolve, reject) => {
@@ -67,15 +65,14 @@ function buscarProduto(id) {
             } else {
                 reject("id inválido");
             }
-        }, 1000); // Espera 1 segundo (1000 milissegundos)
+        }, 1000);
     });
 }
-
 
 // 7. O que está errado neste código? (Versão corrigida e segura com try/catch)
 async function carregarDados() {
     try {
-        const dados = await fetch("https://appspot.com");
+        const dados = await fetch("https://typicode.com");
         const json = await dados.json();
         console.log("Resultado Q7 Corrigida:", json);
     } catch (erro) {
@@ -83,30 +80,26 @@ async function carregarDados() {
     }
 }
 
-
 // 8. Complete o trecho abaixo para imprimir o corpo da resposta já convertido em objeto:
 async function carregar() {
     try {
-        const resposta = await fetch("https://appspot.com");
-        const dados = await resposta.json(); // <-- LACUNA PREENCHIDA COM 'await resposta.json()'
+        const resposta = await fetch("https://typicode.com");
+        const dados = await resposta.json(); 
         console.log("Resultado Q8 Preenchida:", dados);
     } catch (erro) {
         console.log("Erro na Q8:", erro);
     }
 }
 
-
 // =========================================================================
-// 🚀 ESPAÇO DE TESTES (Para você executar no terminal do VS Code)
+// 🚀 ESPAÇO DE TESTES (Execução automática)
 // =========================================================================
 
 async function rodarTestes() {
     console.log("=== INICIANDO TESTES DO DIAGNÓSTICO ===\n");
     
-    // Executa a questão 3
     await executarBuscaProduto();
 
-    // Executa a questão 6
     try {
         console.log("Buscando produto da Q6 (aguardando 1s)...");
         const prodQ6 = await buscarProduto(42);
@@ -115,12 +108,15 @@ async function rodarTestes() {
         console.error(err);
     }
 
-    // Executa as funções com fetch real das questões 7 e 8
     console.log("\nBuscando APIs reais das questões 7 e 8...");
     await carregarDados();
     await carregar();
     
     console.log("\n=== TESTES FINALIZADOS ===");
 }
+
+// ESTA LINHA ATIVA OS TESTES DO SEU TERMINAL:
+rodarTestes();
+
 
 
