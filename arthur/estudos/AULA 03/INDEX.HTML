@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 03 - Laboratório</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; max-width: 500px; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        input, button { padding: 6px; margin-top: 5px; }
+        .aviso-vazio { color: orange; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>Minha Lista de Tarefas</h2>
+    
+    <p id="contador"></p>
+    
+    <!-- EXPERIMENTO 4: Se quiser quebrar a cola, mude o id abaixo para id="listaTarefas" -->
+    <ul id="lista"></ul>
+    
+    <input id="novo" placeholder="nova tarefa">
+    <button id="add">Adicionar</button>
+
+    <script>
+        let tarefas = [
+            { id: 1, texto: "Estudar React", feita: false },
+            { id: 2, texto: "Levar o cachorro", feita: true }
+        ];
+
+        function desenhar() {
+            const ul = document.getElementById("lista");
+            
+            // Se a cola do ID quebrar (Experimento 4), o código vai travar bem aqui:
+            ul.innerHTML = ""; 
+
+            // EXPERIMENTO 3: Trecho 1 - Lidando com a lista vazia
+            if (tarefas.length === 0) {
+                ul.innerHTML = "<p class='aviso-vazio'>Nenhuma tarefa cadastrada!</p>";
+            }
+
+            for (const t of tarefas) {
+                const li = document.createElement("li");
+                
+                // EXPERIMENTO 2: Colocando um input dentro de cada li para teste
+                // Descomente a linha abaixo e comente a linha com 'textContent' para testar:
+                // li.innerHTML = `<input type="text" value="${t.texto}"> ${t.feita ? " (feita)" : ""}`;
+                
+                li.textContent = t.texto + (t.feita ? " (feita)" : "");
+                ul.appendChild(li);
+            }
+            
+            // EXPERIMENTO 3: Trecho 2 - Calculando as tarefas feitas
+            const feitas = tarefas.filter(t => t.feita).length;
+            
+            // EXPERIMENTO 3: Trecho 3 - Atualizando múltiplos contadores espalhados
+            document.getElementById("contador").innerHTML = 
+                `${tarefas.length} tarefas no total | <strong>${feitas} feitas</strong>`;
+        }
+
+        document.getElementById("add").addEventListener("click", () => {
+            const input = document.getElementById("novo");
+            if (!input.value.trim()) return;
+
+            tarefas.push({ id: Date.now(), texto: input.value, feita: false });
+            input.value = "";
+            
+            // EXPERIMENTO 1: Se você comentar a linha abaixo com //, 
+            // o dado entra no vetor, mas a tela mente e não atualiza.
+            desenhar(); 
+            
+            // Para provar que o dado entrou no vetor mesmo sem desenhar na tela:
+            console.log("Vetor atualizado de tarefas:", tarefas);
+        });
+
+        desenhar();
+    </script>
+</body>
+</html>
