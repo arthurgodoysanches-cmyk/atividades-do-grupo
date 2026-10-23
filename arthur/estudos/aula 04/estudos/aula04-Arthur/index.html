@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>NEXUS</title>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    function Cabecalho() {
+      return (
+        <header>
+          <h1>NEXUS</h1>
+          <p>Seu próximo upgrade começa aqui!</p>
+        </header>
+      );
+    }
+
+    function Cartao(props) {
+      return (
+        <div>
+          <h3>{props.nome}</h3>
+          <p>{props.descricao}</p>
+          <p>Preço: {props.preco}</p>
+        </div>
+      );
+    }
+
+    function Lista() {
+      const tarefas = [
+        { id: 1, texto: "Pesquisar placas de vídeo" },
+        { id: 2, texto: "Cadastrar produtos na loja" }
+      ];
+
+      return (
+        <section>
+          <h2>Lista de tarefas</h2>
+          <ul>
+            {tarefas.map((t) => (
+              <li key={t.id}>{t.texto}</li>
+            ))}
+          </ul>
+        </section>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <Cabecalho />
+
+          <h2>Nossos produtos</h2>
+
+          <Cartao
+            nome="Placa de vídeo RTX 4060"
+            descricao="Excelente desempenho para jogos."
+            preco="R$ 2.199,90"
+          />
+
+          <Cartao
+            nome="Processador Ryzen 5 5600"
+            descricao="Ótimo desempenho para jogos e tarefas."
+            preco="R$ 799,90"
+          />
+
+          <Cartao
+            nome="Memória RAM 16 GB"
+            descricao="Mais velocidade para seu computador."
+            preco="R$ 249,90"
+          />
+
+          <Lista />
+        </div>
+      );
+    }
+
+    const raiz = ReactDOM.createRoot(
+      document.getElementById("root")
+    );
+
+    raiz.render(<App />);
+
+  </script>
+
+</body>
+</html>
