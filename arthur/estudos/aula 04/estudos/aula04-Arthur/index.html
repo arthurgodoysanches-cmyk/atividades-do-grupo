@@ -1,9 +1,45 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NEXUS</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f5f9;
+      color: #1e293b;
+      margin: 20px;
+    }
+
+    .destaque {
+      background-color: #0f172a;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .cartao {
+      background-color: white;
+      color: #1e293b;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+    }
+
+    h2 {
+      color: #2563eb;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+  </style>
 </head>
+
 <body>
 
   <div id="root"></div>
@@ -14,18 +50,23 @@
 
   <script type="text/babel">
 
+    // Variável do projeto
+    const projeto = "NEXUS";
+
+    // Componente de cabeçalho
     function Cabecalho() {
       return (
-        <header>
-          <h1>NEXUS</h1>
+        <header className="destaque">
+          <h1>{projeto}</h1>
           <p>Seu próximo upgrade começa aqui!</p>
         </header>
       );
     }
 
+    // Componente de cartão
     function Cartao(props) {
       return (
-        <div>
+        <div className="cartao destaque">
           <h3>{props.nome}</h3>
           <p>{props.descricao}</p>
           <p>Preço: {props.preco}</p>
@@ -33,27 +74,45 @@
       );
     }
 
+    // Componente de lista com ternário
     function Lista() {
       const tarefas = [
-        { id: 1, texto: "Pesquisar placas de vídeo" },
-        { id: 2, texto: "Cadastrar produtos na loja" }
+        {
+          id: 1,
+          texto: "Pesquisar placas de vídeo",
+          feita: true
+        },
+        {
+          id: 2,
+          texto: "Cadastrar produtos na loja",
+          feita: false
+        },
+        {
+          id: 3,
+          texto: "Organizar os preços dos produtos",
+          feita: false
+        }
       ];
 
       return (
-        <section>
+        <section className="cartao">
           <h2>Lista de tarefas</h2>
+
           <ul>
             {tarefas.map((t) => (
-              <li key={t.id}>{t.texto}</li>
+              <li key={t.id}>
+                {t.texto} {t.feita ? "(feita)" : "(pendente)"}
+              </li>
             ))}
           </ul>
         </section>
       );
     }
 
+    // Componente principal usando Fragment
     function App() {
       return (
-        <div>
+        <>
           <Cabecalho />
 
           <h2>Nossos produtos</h2>
@@ -77,7 +136,7 @@
           />
 
           <Lista />
-        </div>
+        </>
       );
     }
 
