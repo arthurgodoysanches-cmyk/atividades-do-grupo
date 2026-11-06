@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus - Hardware e Informática</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f1f5f9;
+      color: #1e293b;
+    }
+
+    header {
+      background-color: #172554;
+      color: white;
+      padding: 25px;
+      border-radius: 12px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 24px;
+    }
+
+    .banner {
+      background-color: #dbeafe;
+      padding: 30px;
+      margin: 24px 0;
+      border-radius: 12px;
+    }
+
+    .banner h2 {
+      color: #172554;
+    }
+
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .destaque {
+      background-color: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .destaque h3 {
+      color: #172554;
+    }
+
+    h2 {
+      color: #1d4ed8;
+    }
+
+    button {
+      background-color: #1d4ed8;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #1e40af;
+    }
+
+    .imagem-banner {
+      display: block;
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    .lista {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px 40px;
+      margin-top: 25px;
+    }
+
+    .lista li {
+      margin: 10px 0;
+    }
+
+    footer {
+      background-color: #172554;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    // Nome do projeto exibido com chaves no JSX
+    const projeto = "Nexus";
+
+    // Cabeçalho da loja
+    function Cabecalho() {
+      return (
+        <header>
+          <h1>{projeto}</h1>
+          <p>Sua loja de hardware e informática.</p>
+          <p>Componentes para montar e melhorar seu computador.</p>
+        </header>
+      );
+    }
+
+    // Componente reutilizável de produto
+    function Cartao({ titulo, descricao }) {
+      return (
+        <div className="destaque">
+          <h3>{titulo}</h3>
+          <p>{descricao}</p>
+          <p><strong>Consulte o preço</strong></p>
+          <button type="button">Ver produtos</button>
+        </div>
+      );
+    }
+
+    // Lista com map, key e operador ternário
+    function Lista() {
+      const tarefas = [
+        { id: 1, texto: "Processador", feita: true },
+        { id: 2, texto: "Placa de vídeo", feita: false },
+        { id: 3, texto: "Memória RAM", feita: true },
+        { id: 4, texto: "Placa-mãe", feita: false }
+      ];
+
+      return (
+        <section className="lista">
+          <h2>Produtos da Nexus</h2>
+          <ul>
+            {tarefas.map((t) => (
+              <li key={t.id}>
+                {t.texto}{" "}
+                {t.feita ? "(feita)" : "(pendente)"}
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    }
+
+    // Tela completa em um único componente,
+    // conforme o exercício de preparação da Aula 05
+    function TelaLoja() {
+      return (
+        <div className="container">
+          <Cabecalho />
+
+          <main>
+            <section className="banner">
+              <h2>Monte o PC dos seus sonhos</h2>
+              <p>
+                Encontre componentes para melhorar
+                o desempenho do seu computador.
+              </p>
+
+              <img
+                className="imagem-banner"
+                src="https://placehold.co/600x250/172554/ffffff?text=Nexus+Hardware"
+                alt="Banner ilustrativo da loja Nexus"
+              />
+            </section>
+
+            <section>
+              <h2>Nossas categorias</h2>
+
+              <div className="produtos">
+                <Cartao
+                  titulo="Processadores"
+                  descricao="Desempenho para seu computador."
+                />
+
+                <Cartao
+                  titulo="Placas de vídeo"
+                  descricao="Potência para jogos e gráficos."
+                />
+
+                <Cartao
+                  titulo="Memórias RAM"
+                  descricao="Mais memória para seus programas."
+                />
+
+                <Cartao
+                  titulo="Placas-mãe"
+                  descricao="A base para montar seu computador."
+                />
+              </div>
+            </section>
+
+            <Lista />
+          </main>
+
+          <footer>
+            <p>© 2026 Nexus - Hardware e Informática</p>
+          </footer>
+        </div>
+      );
+    }
+
+    function App() {
+      return <TelaLoja />;
+    }
+
+    const raiz = ReactDOM.createRoot(
+      document.getElementById("root")
+    );
+
+    raiz.render(<App />);
+
+  </script>
+</body>
+</html>

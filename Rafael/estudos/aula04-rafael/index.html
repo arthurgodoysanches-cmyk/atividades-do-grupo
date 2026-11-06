@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meu primeiro React - Aula 05</title>
+  <style>
+    .destaque {
+      background-color: #2a2a36;
+      color: #00ff88;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script type="text/babel">
+    const projeto = "Nexus Gaming";
+    const proposta = "Sua loja definitiva de jogos, hardware e periféricos.";
+
+    function Cabecalho() {
+      return (
+        <header>
+          <h1>{projeto}</h1>
+          <p>{proposta}</p>
+        </header>
+      );
+    }
+
+    function Cartao() {
+      return (
+        <div className="destaque">
+          <h3>Título do item</h3>
+          <p>Descrição curta do item.</p>
+        </div>
+      );
+    }
+
+    function Lista() {
+      const tarefas = [
+        { id: 1, texto: "Estudar React", feita: true },
+        { id: 2, texto: "Levar o cachorro", feita: false }
+      ];
+      return (
+        <ul>
+          {tarefas.map((t) => (
+            <li key={t.id}>
+              {t.texto} {t.feita ? "(feita)" : "(pendente)"}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+
+    function App() {
+      return (
+        <>
+          <Cabecalho />
+          <Lista />
+          <Cartao />
+          <Cartao />
+          <Cartao />
+        </>
+      );
+    }
+
+    const raiz = ReactDOM.createRoot(document.getElementById("root"));
+    raiz.render(<App />);
+  </script>
+</body>
+</html>
