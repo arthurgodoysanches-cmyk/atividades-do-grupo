@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratório JS Puro - Aula 03</title>
+</head>
+<body>
+  <p id="contador"></p>
+  <ul id="lista"></ul>
+  <input id="novo" placeholder="nova tarefa">
+  <button id="add">Adicionar</button>
+
+  <script>
+    let tarefas = [
+      { id: 1, texto: "Estudar React: ", feita: false },
+      { id: 2, texto: "Levar o cachorro: ", feita: true }
+    ];
+
+    function desenhar() {
+      const ul = document.getElementById("lista");
+      ul.innerHTML = "";
+      for (const t of tarefas) {
+        const li = document.createElement("li");
+        li.textContent = t.texto + (t.feita ? "(feita) " : "");
+        
+        const inputInterno = document.createElement("input");
+        inputInterno.placeholder = "Anotação...";
+        li.appendChild(inputInterno);
+
+        ul.appendChild(li);
+      }
+      document.getElementById("contador").textContent = tarefas.length + " tarefas";
+    }
+
+    document.getElementById("add").addEventListener("click", () => {
+      const input = document.getElementById("novo");
+      if (input.value.trim() === "") return;
+      tarefas.push({ id: Date.now(), texto: input.value, feita: false });
+      input.value = "";
+      desenhar();
+    });
+
+    desenhar();
+  </script>
+</body>
+</html>
